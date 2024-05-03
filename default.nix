@@ -17,7 +17,7 @@ let
 
   ];
 in stdenv.mkDerivation rec {
-  name = "ro.am";
+  name = "roam";
   src = fetchurl {
     url =
       "https://download.ro.am/Roam/8a86d88cfc9da3551063102e9a4e2a83/latest/linux/x64/Roam.deb";

@@ -1,19 +1,29 @@
 # roam-flake
-Flake for ro.am package
+
+Flake for [ro.am](https://ro.am/) application package
 
 # Usage as a flake
-
-[![FlakeHub](https://img.shields.io/endpoint?url=https://flakehub.com/f/xgroleau/roam-flake/badge)](https://flakehub.com/flake/xgroleau/roam-flake)
 
 Add roam-flake to your `flake.nix`:
 
 ```nix
 {
-  inputs.roam-flake.url = "https://flakehub.com/f/xgroleau/roam-flake/*.tar.gz";
+  inputs.roam.url = "github:xgroleau/roam-flake";
 
-  outputs = { self, roam-flake }: {
-    # Use in your outputs
+  outputs = { nixpkgs, roam, ... } @ inputs: {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        {
+          environment.systemPackages = [ roam.packages.x86_64-linux.default ];
+        }
+
+        # ... the rest of your modules here ...
+      ];
+    };
   };
 
 }
 ```
+
+If you use it with NixOS, you will probably need to enable `services.passSecretService.enable = true;` to save you account
