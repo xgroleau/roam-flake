@@ -1,6 +1,5 @@
-{ lib, stdenv, makeWrapper, fetchurl, dpkg, alsa-lib, atk, cairo, cups, dbus
-, expat, fontconfig, freetype, gdk-pixbuf, glib, pango, mesa, nspr, nss, gtk3
-, at-spi2-atk, gsettings-desktop-schemas, gobject-introspection, wrapGAppsHook
+{ lib, stdenv, makeWrapper, fetchurl, dpkg, alsa-lib, dbus, fontconfig, freetype
+, glib, mesa, nspr, nss, gobject-introspection, wrapGAppsHook, libGL, libnotify
 , libsecret, libX11, libXScrnSaver, libXcomposite, libXcursor, libXdamage
 , libXext, libXfixes, libXi, libXrandr, libXrender, libXtst, libxcb
 , libxshmfence, nghttp2, libudev0-shim, glibc, curl, openssl, autoPatchelfHook
@@ -10,9 +9,12 @@ let
     curl
     glibc
     libudev0-shim
+    libGL
+    libnotify
     nghttp2
     openssl
     stdenv.cc.cc.lib
+
   ];
 in stdenv.mkDerivation rec {
   name = "ro.am";
@@ -27,31 +29,18 @@ in stdenv.mkDerivation rec {
 
   buildInputs = [
     alsa-lib
-    at-spi2-atk
-    atk
-    cairo
-    cups
     dbus
-    expat
     fontconfig
     freetype
-    gdk-pixbuf
     glib
-    pango
-    gtk3
-    gsettings-desktop-schemas
     libsecret.dev
     libX11
     libXScrnSaver
     libXcomposite
     libXcursor
-    libXdamage
-    libXext
-    libXfixes
     libXi
     libXrandr
     libXrender
-    libXtst
     libxcb
     libxshmfence
     mesa # for libgbm
