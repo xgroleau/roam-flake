@@ -20,7 +20,7 @@ in stdenv.mkDerivation rec {
   name = "roam";
   src = fetchurl {
     url =
-      "https://download.ro.am/Roam/8a86d88cfc9da3551063102e9a4e2a83/linux/debian/binary/108.0.0-beta001-roam_108.0.0-beta001_amd64.deb";
+      "https://download.ro.am/Roam/8a86d88cfc9da3551063102e9a4e2a83/latest/linux/x64/Roam.deb";
     sha256 = "sha256-ndxrZZI05jAv1EBSPuiMeGWswxK1g6yUebEbQfji1gU=";
   };
 
