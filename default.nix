@@ -21,7 +21,7 @@ in stdenv.mkDerivation rec {
   src = fetchurl {
     url =
       "https://download.ro.am/Roam/8a86d88cfc9da3551063102e9a4e2a83/latest/linux/x64/Roam.deb";
-    sha256 = "sha256-ndxrZZI05jAv1EBSPuiMeGWswxK1g6yUebEbQfji1gU=";
+    sha256 = "08dfhxsrlzkcw2qkil3f8dmr8d33byiv7dbmcvi36dngyl8yr4wc";
   };
 
   nativeBuildInputs =
