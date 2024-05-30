@@ -21,6 +21,9 @@ jobs:
         id: changes
         uses: UnicornGlobal/has-changes-action@v1.0.11
 
+      - name: Test
+        run: cat ${GITHUB_WORKSPACE}/default.nix && git status
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         if: steps.changes.outputs.changed == 1
