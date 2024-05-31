@@ -14,6 +14,25 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
 
+      - name: Update roam URL
+        run: |
+          # Yes, we just get the "source" variable from PKGBUILD instead of using the AUR rest api to fetch the version
+          # So if roam change the base URL, it will still work
+          git clone https://aur.archlinux.org/roam ${RUNNER_TEMP}/roam
+          echo "echo ROAM_URL=\$source" >> ${RUNNER_TEMP}/roam/PKGBUILD
+          echo "echo ROAM_VERSION=\$pkgver" >> ${RUNNER_TEMP}/roam/PKGBUILD
+
+          # make it executable, run it and get the variables
+          chmod +x ${RUNNER_TEMP}/roam/PKGBUILD
+          export $(${RUNNER_TEMP}/roam/PKGBUILD | xargs)
+
+
+          # A bit of perl cancer to update the variables
+          perl -0777 -i -pe '$var = $ENV{ROAM_URL}; s/url\s*=\s*\"[^\"\n\r;]+\";/url = "$var";/g' default.nix
+          perl -0777 -i -pe '$var = $ENV{ROAM_VERSION}; s/version\s*=\s*\"[^\"\n\r;]+\";/version = "$var";/g' default.nix
+
+          # Format files as needed
+          nix fmt
       - name: Update hash
         run: nix run nixpkgs#update-nix-fetchgit ${GITHUB_WORKSPACE}/default.nix
 
@@ -34,8 +53,6 @@ jobs:
         with:
           token: ${{ steps.create_token.outputs.token }}
           commit-message: Update ro.am hash
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           branch: chore/bump-hash
           title: "Chore: Bump hash of ro.am"
           body: |
