@@ -1,4 +1,4 @@
-name: Update hash
+name: Update package
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: "33 8 * * *"
 
 jobs:
-  update-hash:
+  update-package:
     name: update-hash
     runs-on: ubuntu-22.04
     steps:
