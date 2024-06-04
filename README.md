@@ -26,4 +26,4 @@ Add roam-flake to your `flake.nix`:
 }
 ```
 
-If you use it with NixOS, you will probably need to enable `services.passSecretService.enable = true;` to save you account
+If you use it with NixOS, you will probably need to enable a keyring like `gnome.gnome-keyring.enable = true;` to save you account creds. If not, you will need to relogin everytime you open the app.
