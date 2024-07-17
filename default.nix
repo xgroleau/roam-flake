@@ -51,10 +51,10 @@ let
 in
 stdenv.mkDerivation rec {
   name = "roam";
-  version = "117.0.0.beta001";
+  version = "118.0.0.beta001";
   src = fetchurl {
-    url = "https://download.ro.am/Roam/8a86d88cfc9da3551063102e9a4e2a83/linux/debian/binary/117.0.0-beta001-roam_117.0.0-beta001_amd64.deb";
-    sha256 = "10slc1644pawwhz8d74qy8k6ys4gk29isx45jamc50pxnlpz6yph";
+    url = "https://download.ro.am/Roam/8a86d88cfc9da3551063102e9a4e2a83/linux/debian/binary/118.0.0-beta001-roam_118.0.0-beta001_amd64.deb";
+    sha256 = "1ssrf1fgag342rdvn3mx0353z3a1smdsl5zhij7wj2vgrf55m3ay";
   };
 
   nativeBuildInputs = [
