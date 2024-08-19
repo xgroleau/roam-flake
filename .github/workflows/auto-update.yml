@@ -50,6 +50,7 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
+        id: cpr
         if: ${{ env.has_changes != 0 }}
         with:
           token: ${{ steps.create_token.outputs.token }}
@@ -64,3 +65,11 @@ jobs:
             [1]: https://github.com/peter-evans/create-pull-request
           assignees: xgroleau
           reviewers: xgroleau
+
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ steps.create_token.outputs.token }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
