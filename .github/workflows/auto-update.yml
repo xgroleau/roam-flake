@@ -19,7 +19,7 @@ jobs:
           # Yes, we just get the "source" variable from PKGBUILD instead of using the AUR rest api to fetch the version
           # So if roam change the base URL, it will still work
           git clone https://aur.archlinux.org/roam ${RUNNER_TEMP}/roam
-          echo "echo ROAM_URL=\$source" >> ${RUNNER_TEMP}/roam/PKGBUILD
+          echo "echo ROAM_URL=\$source_x86_64" >> ${RUNNER_TEMP}/roam/PKGBUILD
           echo "echo ROAM_VERSION=\$pkgver" >> ${RUNNER_TEMP}/roam/PKGBUILD
 
           # make it executable, run it and get the variables
